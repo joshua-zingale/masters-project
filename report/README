@@ -1,2 +1,2 @@
-To compile the report, you must have pandoc installed and have the executable in your PATH with the name "pandoc".
-With pandoc installed, you may run compile.bash to compile the report.
+To compile the report, you must have `pandoc` installed and have the executable in your PATH with the name "pandoc".
+With `pandoc` installed, you may run `compile.bash` to compile the report.

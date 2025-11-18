@@ -5,6 +5,7 @@ if [ $? -ne 0 ]; then
     echo "$unique_refs"
 fi
 
-pandoc report.md -o report.pdf --citeproc
-
+pandoc report.md -o report.pdf \
+    --citeproc \
+    --from markdown+inline_notes
 echo "Compilation complete"
