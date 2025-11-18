@@ -1,0 +1,6 @@
+Contained herein are source documents for the 5 software sprints that were run over the summer of 2025 during the Data Science Fellowship at University of California Riverside.
+Joshua Zingale led six undergraduate students to develop an AI Tutor. The names of the six undergraduate students have been replaced with "Student #1-6".
+
+
+To compile the sprints, you must have `pandoc` installed and have the executable in your PATH with the name "pandoc".
+With `pandoc` installed, you may run `compile.bash` to compile the report.
