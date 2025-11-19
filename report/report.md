@@ -9,7 +9,7 @@ bibliography: references.bib
 
 Aligning general-purpose generative AI to meet domain specific needs is an active area of research and development in both academia and industry.
 
-In this study, we introduce a prototype AI Tutor to three UC Riverside computer science sections across two courses. The AI Tutor was made available to all students in the sections and students' usage data were collected.
+In this study, we introduce a prototype AI Tutor to three UC Riverside computer science sections across two courses. The AI Tutor was made available to all students in the sections, with students' usage data being collected.
 
 After a discussion of related works, we describe the AI Tutor's design and functionality.
 Next, we describe the development process for the AI Tutor and its means of deployment.
@@ -26,7 +26,7 @@ Language models are now capable enough to understand open-ended messages from hu
 Seeking a fuller understanding of the limits at which this emergent technology may be used,
 educators have taken to implement language models as instructional aids in varying contexts and to varying extents.
 
-For example, @qinjin_jia_llm-generated_2024 and @neyem_exploring_2024 use language models to generate automated feedback on student work. @taylor_dcc_2024 integrated language-model generation into a C compiler to enhance the explanatory power of compiler errors for students. @kazemitabaar_codeaid_2024 created an interactive web environment wherein students can submit code before asking questions about it. In what may be the most comprehensive published adoption of language models in a university course, @liu2024teaching deployed a suite of custom language-model powered tools to provide students with 24/7 support during Harvard's introductory computer science course, including a chat interface for general logistic or material questions, an IDE extension for in-editor assistance, and a bot that contributes to a course forum.
+For example, @qinjin_jia_llm-generated_2024 and @neyem_exploring_2024 use language models to generate automated feedback on student work. @taylor_dcc_2024 integrated language-model generation into a C compiler to enhance the explanatory power of compiler errors for students. @kazemitabaar_codeaid_2024 created an interactive web environment wherein students can submit code before asking questions about it. In what may be the most comprehensive published adoption of language models in a university course, @liu2024teaching deployed a suite of custom language-model powered tools to provide students with 24/7 support during Harvard's introductory computer-science course, including a chat interface for general logistic or material questions, an IDE extension for in-editor assistance, and a bot that contributes to a course forum.
 
 
 ## Pedagogical Issues with Language Models
@@ -38,13 +38,13 @@ such as to complete an assignment for the student.
 
 
 ### Addressing Hallucination
-One approach for combatting hallucination is fine-tuning, which performs additional training of a pretrained language model using a course-specific dataset that is much smaller than the pretraining dataset, which has been used for pedagogical language models [@qinjin_jia_llm-generated_2024]. However, the compute and cost associated with training a state-of-the-art language model are often prohibitive [@soudani2024fine].
+One approach for combatting hallucination is fine-tuning, which performs additional training of a pretrained language model using a course-specific dataset that is much smaller than the pretraining dataset, which has been used for pedagogical language models [@qinjin_jia_llm-generated_2024]. However, the compute and cost associated with training or fine-tuning a state-of-the-art language model are often prohibitive [@soudani2024fine].
 
 Retrieval Augmented Generation (RAG) [@lewis2020retrieval] can be used to reduce hallucination [@kirchenbauer2024hallucination], even without the need to retrain the language model [@soudani2024fine]. RAG works by augmenting user prompts with relevant context that should guide the language model's generation. Pedagogical language-model systems have used course-specific documents, such as lecture notes and slides, as a data source for RAG [@liu2024teaching].
 
 
 ### Addressing Oversharing
-To prevent too much information from being shared with students, many pedagogical language-model systems use prompt engineering [@taylor_dcc_2024; @liu2024teaching]
+To prevent too much information from being shared with students, many pedagogical language-model systems use prompt engineering [@taylor_dcc_2024; @liu2024teaching].
 
 
 # The AI Tutor
@@ -135,9 +135,40 @@ Development of the AI Tutor took place over two distinct periods.
 Development began during an eight-week summer data-science fellowship program for undergraduate and master's students at UC Riverside and one of the authors (Zingale) continued development after the program's end.
 
 
+## Student Developers
 The summer program split a cohort of 22 students into project groups and supported them with professional development lectures and workshops.
-During the summer program, one of the authors (Zingale) led a team of six undergraduate students to develop the AI Tutor.
-Development did not start until 
+During the summer program, one of the authors (Zingale) led a team of six upperclassman undergraduates to develop the AI Tutor.
+The development team members had foundational programming knowledge but lacked experience working on a development team;
+to wit, they had not been exposed to coding standards, code linters, unit tests with code coverage requirements, nor continuous integration.
+
+## Coding Standards
+
+The following standards were enforced on all code to encourage code maintainability. All Python code had to pass
+
+- Pyright^[[https://github.com/microsoft/pyright](https://github.com/microsoft/pyright)] on strict mode, a type checker that requires the use of Python's otherwise optional type annotations;
+- Ruff^[[https://github.com/astral-sh/ruff](https://github.com/astral-sh/ruff)]'s formatting and logic checks, which checked for such things as docstring presence and lack of unused variables;
+- and all unit tests.
+
+## Code Repository Management
+
+All code was (and is) stored in a GitHub repository^[[https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master](https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master)].
+The team members were not granted write permissions on the master branch;
+instead, they had to submit pull requests to satisfy their sprint objectives.
+
+All team members were not granted push permissions on the master branch 
+
+## 
+
+
+
+
+Development was managed over five roughly-week-long sprints.
+
+
+
+
+
+Each sprint 
 
 # Deployment
 
