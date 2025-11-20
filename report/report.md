@@ -8,12 +8,25 @@ bibliography: references.bib
 # Introduction
 
 Aligning general-purpose generative AI to meet domain specific needs is an active area of research and development in both academia and industry.
+Whereas language models as generative AI tools have been adopted either officially by instructors as instructional aids or unofficially by students using them with or without the consent of their instructors, the question remains as to the effectiveness or hindrance of generative AI in educational settings.
 
-In this study, we introduce a prototype AI Tutor to three UC Riverside computer science sections across two courses. The AI Tutor was made available to all students in the sections, with students' usage data being collected.
+In this study, we introduce a prototype AI Tutor to three UC Riverside computer-science sections across two courses. The AI Tutor was made available to all students in the sections, with students' usage data being collected.
+Moreover, works like @liu2024teaching, though comprehensive in their offering of language-model-driven tools designed specifically for Harvard University, are not representative of what may be feasible at the typical institution with limited staff support but seeking to develop an institutionally specific AI Tutor.
+We therefore report also on our student-driven development, our deployment, the financial support from our university, and our experience with our university's Information Technology Systems (ITS) and Internal Review Board (IRB).
+
+From this work, we seek to equip researchers with data from our institution on how students adopted the AI Tutor and with guidance for making a similar deployment at their own institutions.
 
 After a discussion of related works, we describe the AI Tutor's design and functionality.
 Next, we describe the development process for the AI Tutor and its means of deployment.
-To aid researchers in getting similar studies approved by their Internal Review Boards (IRBs), we also document some of the contention points from our experience. After we report on some aggregate data from our students' usage, we finally identify future directions of research.
+To aid researchers in getting similar studies approved by their Internal Review Boards (IRBs), we also document some contention points from our experience. After we report on some aggregate data from our students' usage, we finally identify future directions of research.
+
+This work marks the first published deployment of a generative AI assistant for student use at UC Riverside.
+Extra-institutionally, we make the following contributions:
+- a technical outline of language-model integration for educational use,
+- a development outline for replication by other institutions,
+- experience approving and funding a deployment 
+- data on student interactions with the AI tutor from a major US, R1 institution,
+- 
 
 # Related Works
 
@@ -83,6 +96,10 @@ Whenever a user sends a message to the AI Tutor, the following happens:
 The choices to make each segment about 1,000 characters and to select the top-8 most similar segments were both made after informal qualitative analysis of prompt-response pairs during development.
 
 
+## Data Collection
+
+To assist in answering our research questions.
+
 ## Web Interface
 
 Students and instructors access the AI Tutor through our web interface. The web server uses Flask^[[https://flask.palletsprojects.com/en/stable/](https://flask.palletsprojects.com/en/stable/)], a light-weight Python library for creating web endpoints.
@@ -128,51 +145,83 @@ Should a student desire to inspect the segments referenced during RAG, the stude
 
 ![The conversation menu for interacting with the AI Tutor. A user may send and receive messages to and from the AI Tutor.](images/conversation.png)
 
-
 # Development
 
 Development of the AI Tutor took place over two distinct periods.
 Development began during an eight-week summer data-science fellowship program for undergraduate and master's students at UC Riverside and one of the authors (Zingale) continued development after the program's end.
+For the first half of development the goals were twofold:
+on the one hand, the development during the fellowship was to serve as a learning experience for the fellows;
+on the other hand, the AI Tutor was to be developed.
 
 
 ## Student Developers
 The summer program split a cohort of 22 students into project groups and supported them with professional development lectures and workshops.
-During the summer program, one of the authors (Zingale) led a team of six upperclassman undergraduates to develop the AI Tutor.
+During the summer program, one of the authors (Zingale) managed a team of six upperclassman undergraduates to develop the AI Tutor.
 The development team members had foundational programming knowledge but lacked experience working on a development team;
 to wit, they had not been exposed to coding standards, code linters, unit tests with code coverage requirements, nor continuous integration.
 
+Given the limited length of the summer program, starting to code as soon as possible was imperative. This imperative led the design of the coding standards, code repository management, and sprints.
+The aspects were designed both to educate the student developers on working toward a production environment and to encourage maintainable code beyond the students' abandonment of the project. 
+
 ## Coding Standards
 
-The following standards were enforced on all code to encourage code maintainability. All Python code had to pass
+The following standards were enforced, requiring all Python code to pass
 
 - Pyright^[[https://github.com/microsoft/pyright](https://github.com/microsoft/pyright)] on strict mode, a type checker that requires the use of Python's otherwise optional type annotations;
 - Ruff^[[https://github.com/astral-sh/ruff](https://github.com/astral-sh/ruff)]'s formatting and logic checks, which checked for such things as docstring presence and lack of unused variables;
-- and all unit tests.
+- all existent unit tests;
+- and test coverage expectations, instructing the student developers to write tests for added features.
+
+
+These standards were new to all the student developers, but they learned well within the first week of development how to run the tests and how to bring their code into compliance therewith.
+
+As soft evidence for their effectiveness in producing more maintainable code, the researcher who continued development after the summer program's end notes that the front end code, namely the HTML, CSS, and JavaScript, which had no such automated coding standards, was harder to reason about and more difficult to modify, i.e. less maintainable, than the automatically checked Python code.
+
+
 
 ## Code Repository Management
 
 All code was (and is) stored in a GitHub repository^[[https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master](https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master)].
-The team members were not granted write permissions on the master branch;
-instead, they had to submit pull requests to satisfy their sprint objectives.
+The repository was configured with protections on the master branch to prevent commit pushes.
+The repository was moreover configured with Continuous Integration (CI) to run Pyright, Ruff and, the unit tests against every pull request and after each merge. 
+This prevented the team members from writing to the master branch directly.
+Instead, each team member had to submit a pull request to satisfy his sprint objectives.
+All pull requests were reviewed both by the CI and the team manager before being accepted or rejected.
+This paradigm upheld code maintainability by catching problematic code before others' work built upon it.
 
-All team members were not granted push permissions on the master branch 
+## Sprints
 
-## 
+Development was managed over five roughly-week-long sprints^[[https://github.com/joshua-zingale/masters-project/tree/master/development-sprints][https://github.com/joshua-zingale/masters-project/tree/master/development-sprints]]. All sprints began with a heading containing one-line statements that included
 
+- **State:** the current state of the project,
+- **Objective:** that to be accomplished during the sprint,
+- **Future:** work to be accomplished after the sprint had been completed.
 
+After the heading, each sprint had a few paragraphs for an introduction that described logistic information, coding style guides, or other general topics for the whole development team.
+Then, every sprint assigned each of the student developers a unique task to accomplish either individually or in a group.
 
+The heading provided the student developers with a bird's eye view of the sprint, giving them a sense of their progress toward the end goal.
 
-Development was managed over five roughly-week-long sprints.
-
-
-
-
-
-Each sprint 
 
 # Deployment
 
-# Study Approval
+The AI Tutor was deployed as a web service and made available to three sections across two courses at UC Riverside in Fall 2025.
+
+
+## Hosting Platform
+
+The AI Tutor was deployed in the Google Cloud Platform on three `e2-medium (2 vCPUs, 4 GB Memory)` instances.
+Similar to the reasoning for our choice in which language model to use, we selected the Google Cloud Platform because of UC Riverside's effective contract with Google for various services.
+Since the 
+
+
+# Institutional Support
+
+To deploy the AI Tutor at UC Riverside for 
+
+## ITS
+
+## IRB
 
 
 # Preliminary Results
