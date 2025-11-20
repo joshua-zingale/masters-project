@@ -22,11 +22,11 @@ To aid researchers in getting similar studies approved by their Internal Review 
 
 This work marks the first published deployment of a generative AI assistant for student use at UC Riverside.
 Extra-institutionally, we make the following contributions:
+
 - a technical outline of language-model integration for educational use,
 - a development outline for replication by other institutions,
-- experience approving and funding a deployment 
-- data on student interactions with the AI tutor from a major US, R1 institution,
-- 
+- experience approving and funding a deployment,
+- and data on student interactions with the AI tutor from a major US, R1 institution.
 
 # Related Works
 
@@ -39,7 +39,7 @@ Language models are now capable enough to understand open-ended messages from hu
 Seeking a fuller understanding of the limits at which this emergent technology may be used,
 educators have taken to implement language models as instructional aids in varying contexts and to varying extents.
 
-For example, @qinjin_jia_llm-generated_2024 and @neyem_exploring_2024 use language models to generate automated feedback on student work. @taylor_dcc_2024 integrated language-model generation into a C compiler to enhance the explanatory power of compiler errors for students. @kazemitabaar_codeaid_2024 created an interactive web environment wherein students can submit code before asking questions about it. In what may be the most comprehensive published adoption of language models in a university course, @liu2024teaching deployed a suite of custom language-model powered tools to provide students with 24/7 support during Harvard's introductory computer-science course, including a chat interface for general logistic or material questions, an IDE extension for in-editor assistance, and a bot that contributes to a course forum.
+For example, @qinjin_jia_llm-generated_2024 and @neyem_exploring_2024 use language models to generate automated feedback on student work. @taylor_dcc_2024 integrated language-model generation into a C compiler to enhance the explanatory power of compiler errors for students. @kazemitabaar_codeaid_2024 created an interactive web environment wherein students can submit code before asking questions about it. In what may be the most comprehensive published adoption of language models in a university course, @liu2024teaching deployed a suite of custom language-model powered tools to provide students with 24/7 support during Harvard's introductory computer-science course, including a chat interface for general logistic or material questions, an IDE extension for in-editor assistance, and a bot that contributes to the course forum.
 
 
 ## Pedagogical Issues with Language Models
@@ -175,7 +175,7 @@ The following standards were enforced, requiring all Python code to pass
 
 These standards were new to all the student developers, but they learned well within the first week of development how to run the tests and how to bring their code into compliance therewith.
 
-As soft evidence for their effectiveness in producing more maintainable code, the researcher who continued development after the summer program's end notes that the front end code, namely the HTML, CSS, and JavaScript, which had no such automated coding standards, was harder to reason about and more difficult to modify, i.e. less maintainable, than the automatically checked Python code.
+As soft evidence for the checks' effectiveness in producing more maintainable code, the researcher who continued development after the summer program's end notes that the front end code, namely the HTML, CSS, and JavaScript, which had no such automated coding standards, was harder to reason about and more difficult to modify, i.e. less maintainable, than the automatically checked Python code.
 
 
 
@@ -183,7 +183,7 @@ As soft evidence for their effectiveness in producing more maintainable code, th
 
 All code was (and is) stored in a GitHub repository^[[https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master](https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master)].
 The repository was configured with protections on the master branch to prevent commit pushes.
-The repository was moreover configured with Continuous Integration (CI) to run Pyright, Ruff and, the unit tests against every pull request and after each merge. 
+The repository was moreover configured with Continuous Integration (CI) to run Pyright, Ruff, and the unit tests against every pull request and after each merge. 
 This prevented the team members from writing to the master branch directly.
 Instead, each team member had to submit a pull request to satisfy his sprint objectives.
 All pull requests were reviewed both by the CI and the team manager before being accepted or rejected.
@@ -200,7 +200,7 @@ Development was managed over five roughly-week-long sprints^[[https://github.com
 After the heading, each sprint had a few paragraphs for an introduction that described logistic information, coding style guides, or other general topics for the whole development team.
 Then, every sprint assigned each of the student developers a unique task to accomplish either individually or in a group.
 
-The heading provided the student developers with a bird's eye view of the sprint, giving them a sense of their progress toward the end goal.
+The heading provided the student developers with a bird's eye view of the sprint, giving them a sense of their progress toward the end goal and an understanding of how their individual assignments contribute to the entire project.
 
 
 # Deployment
@@ -212,7 +212,7 @@ The AI Tutor was deployed as a web service and made available to three sections 
 
 The AI Tutor was deployed in the Google Cloud Platform on three `e2-medium (2 vCPUs, 4 GB Memory)` instances.
 Similar to the reasoning for our choice in which language model to use, we selected the Google Cloud Platform because of UC Riverside's effective contract with Google for various services.
-Since the 
+The instances' grade was selected above what we anticipated ourselves to need in order to facilitate expanded computational demand in future work.
 
 
 # Institutional Support
