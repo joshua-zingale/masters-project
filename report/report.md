@@ -11,7 +11,8 @@ Aligning general-purpose generative AI to meet domain specific needs is an activ
 Whereas language models as generative AI tools have been adopted either officially by instructors as instructional aids or unofficially by students using them with or without the consent of their instructors, the question remains as to the effectiveness or hindrance of generative AI in educational settings.
 
 In this study, we introduce a prototype AI Tutor to three UC Riverside computer-science sections across two courses. The AI Tutor was made available to all students in the sections, with students' usage data being collected.
-Moreover, works like @liu2024teaching, though comprehensive in their offering of language-model-driven tools designed specifically for Harvard University, are not representative of what may be feasible at the typical institution with limited staff support but seeking to develop an institutionally specific AI Tutor.
+
+Works like @liu2024teaching, though comprehensive in their offering of language-model-driven tools designed specifically for Harvard University, are not representative of what may be feasible at the typical institution with limited staff support but seeking to develop an institutionally specific AI Tutor.
 We therefore report also on our student-driven development, our deployment, the financial support from our university, and our experience with our university's Information Technology Systems (ITS) and Internal Review Board (IRB).
 
 From this work, we seek to equip researchers with data from our institution on how students adopted the AI Tutor and with guidance for making a similar deployment at their own institutions.
@@ -86,7 +87,7 @@ To enable us to perform semantic searches of the text, we also embed each textua
 Each segment is then stored into a Postgres^[[https://github.com/postgres/postgres](https://github.com/postgres/postgres)] database with both its textual and vector representation.
 The vector is stored using the `pgvector`^[[https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)] extension's `VECTOR` type, which allows for efficient vector similarity queries.
 
-Whenever a user sends a message to the AI Tutor, the following happens:
+Whenever a user sends a message to the AI Tutor, the following steps are taken.
 
 1. The user's message is embedded into a vector with the same embedding model as was used for the documents.
 2. The textual segments with the top-8 most similar vector embeddings to the user's message are retrieved from the database.
