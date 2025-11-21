@@ -1,7 +1,7 @@
 ---
 title: The Development and Introduction in Computer-Science Courses of an AI Tutor
 author: Joshua Zingale
-abstract: "Teaching with general-purpose generative AI as an aid poses multiple challenges to educators: for instance, providing false information, teaching out-of-scope concepts, and giving full assignment answers to students all lower the degree of confidence with which generative AI may be deployed. We therefore present a prototype AI Tutor. This report covers the AI Tutor's development and deployment in three computer-science courses, from which we collect data to inform future research directions." 
+abstract: "General-purpose generative AI has been deployed in many computer science courses as an instructional aid. We present a prototype AI Tutor along with our experience developing, deploying, and gaining institutional support for it, both from our Information Technology Systems and Internal Review Board. We also report on data that we collected from student interactions with the AI Tutor, which occured in three sections across the two computer-science courses in which we deployed the AI Tutor." 
 bibliography: references.bib
 ---
 
@@ -28,6 +28,8 @@ Extra-institutionally, we make the following contributions:
 - a development outline for replication by other institutions,
 - experience approving and funding a deployment,
 - and data on student interactions with the AI tutor from a major US, R1 institution.
+
+Our goal with the student-interaction data was observational, meaning we did not have formal hypotheses for which to build evidence. Instead, this study builds the foundation for future research into the effectiveness of such systems in computer-science curricula.
 
 # Related Works
 
@@ -84,6 +86,9 @@ however, such a conclusion is not a research finding and should be taken lightly
 We implemented RAG to help align generations to our courses' contexts.
 Specifically, we take a collection of course documents, including lecture slides, lecture notes, assignments, and textbook chapters, and segment each document into spans of text about 1,000 characters in length.
 To enable us to perform semantic searches of the text, we also embed each textual segment into a numerical vector representation using version 1.5 of `nomic-embed-text` [@nussbaum2024nomic].
+
+The embedding model was self-hosted using Ollama^[[https://ollama.com/](https://ollama.com/)], an open-source platform for hosting language models. We opted to use a self-hosted solution instead of a cloud solution because we anticipate modifying the RAG process in future work.
+
 Each segment is then stored into a Postgres^[[https://github.com/postgres/postgres](https://github.com/postgres/postgres)] database with both its textual and vector representation.
 The vector is stored using the `pgvector`^[[https://github.com/pgvector/pgvector](https://github.com/pgvector/pgvector)] extension's `VECTOR` type, which allows for efficient vector similarity queries.
 
@@ -99,7 +104,8 @@ The choices to make each segment about 1,000 characters and to select the top-8 
 
 ## Data Collection
 
-To assist in answering our research questions.
+To provide a chat interface to students, all messages sent from students to the AI Tutor, along with the messages sent back to the students, need to be stored to allow students and the AI Tutor to reference a conversation's logs.
+These logs are stored also to help answer research quest
 
 ## Web Interface
 
@@ -149,17 +155,18 @@ Should a student desire to inspect the segments referenced during RAG, the stude
 # Development
 
 Development of the AI Tutor took place over two distinct periods.
-Development began during an eight-week summer data-science fellowship program for undergraduate and master's students at UC Riverside and one of the authors (Zingale) continued development after the program's end.
+Development began during an eight-week summer data-science fellowship program for undergraduate and master's students at UC Riverside, then continuing with one of the authors (Zingale) continued development after the program's end.
 For the first half of development the goals were twofold:
 on the one hand, the development during the fellowship was to serve as a learning experience for the fellows;
 on the other hand, the AI Tutor was to be developed.
+This student-developer portion will be discussed below.
 
 
 ## Student Developers
 The summer program split a cohort of 22 students into project groups and supported them with professional development lectures and workshops.
 During the summer program, one of the authors (Zingale) managed a team of six upperclassman undergraduates to develop the AI Tutor.
-The development team members had foundational programming knowledge but lacked experience working on a development team;
-to wit, they had not been exposed to coding standards, code linters, unit tests with code coverage requirements, nor continuous integration.
+The student developers had foundational programming knowledge but lacked experience working on a development team;
+to wit, they had not worked with coding standards, code linters, unit tests with code coverage requirements, nor continuous integration.
 
 Given the limited length of the summer program, starting to code as soon as possible was imperative. This imperative led the design of the coding standards, code repository management, and sprints.
 The aspects were designed both to educate the student developers on working toward a production environment and to encourage maintainable code beyond the students' abandonment of the project. 
