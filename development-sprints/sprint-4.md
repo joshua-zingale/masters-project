@@ -68,7 +68,7 @@ you studied last sprint.
 This testing is to take priority after the presentation for the high
 schoolers is complete.
 
-**Assistant Messages --- Shreyes and Student #4 (DB help as needed from
+**Assistant Messages --- Student #6 and Student #4 (DB help as needed from
 Student #1 and Student #3)**
 
 This is the last of the primary features to be implemented. You must add

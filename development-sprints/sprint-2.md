@@ -123,7 +123,7 @@ redirected or shown an invalid permissions message as appropriate.
 Importantly, the LLM API must require authenticated access, lest people
 use our endpoint for free Gemini credits.
 
-**Chatroom --- Shreyes, Student #4, Student #1**
+**Chatroom --- Student #6, Student #4, Student #1**
 
 **Objective:** Write code for a web endpoint for chatting with the
 RAG-powered LLM

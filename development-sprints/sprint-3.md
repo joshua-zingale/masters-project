@@ -78,7 +78,7 @@ how his approach differs from ours, both in code structure and in
 generation methodology. Get it running on your machine and prepare a
 live demonstration.
 
-**Sundry Code Issues --- Shreyes**
+**Sundry Code Issues --- Student #6**
 
 Resolve the various issues that I have opened on GitHub for our
 repository. I may open up more issues throughout the week. I will try to
