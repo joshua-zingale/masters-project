@@ -65,7 +65,7 @@ To prevent too much information from being shared with students, many pedagogica
 
 # The AI Tutor
 
-Retrieval-Augmented Generation (RAG) and prompt engineering together work to align a pretrained language model for our courses' contexts.
+Retrieval-Augmented Generation (RAG) and prompt engineering together worked to align a pretrained language model for our courses' contexts.
 This system was then presented to students via a web interface similar to ChatGPT or Google Gemini.
 
 
@@ -96,7 +96,7 @@ Whenever a user sends a message to the AI Tutor, the following steps are taken.
 
 1. The user's message is embedded into a vector with the same embedding model as was used for the documents.
 2. The textual segments with the top-8 most similar vector embeddings to the user's message are retrieved from the database.
-3. The retrieved textual segments are then inserted into our prompt template along with the user's message.
+3. The retrieved textual segments are inserted into our prompt template along with the user's message.
 4. The instantiated template is sent to the language model along with the system prompt and the chat history to generate a new response.
 
 The choices to make each segment about 1,000 characters and to select the top-8 most similar segments were both made after informal qualitative analysis of prompt-response pairs during development.
@@ -155,7 +155,7 @@ Should a student desire to inspect the segments referenced during RAG, the stude
 # Development
 
 Development of the AI Tutor took place over two distinct periods.
-Development began during an eight-week summer data-science fellowship program for undergraduate and master's students at UC Riverside, then continuing with one of the authors (Zingale) continued development after the program's end.
+Development began during an eight-week summer data-science fellowship program for undergraduate and master's students at UC Riverside, then continuing with one of the authors (Zingale) continuing development after the program's end.
 For the first half of development the goals were twofold:
 on the one hand, the development during the fellowship was to serve as a learning experience for the fellows;
 on the other hand, the AI Tutor was to be developed.
@@ -183,7 +183,7 @@ The following standards were enforced, requiring all Python code to pass
 
 These standards were new to all the student developers, but they learned well within the first week of development how to run the tests and how to bring their code into compliance therewith.
 
-As soft evidence for the checks' effectiveness in producing more maintainable code, the researcher who continued development after the summer program's end notes that the front end code, namely the HTML, CSS, and JavaScript, which had no such automated coding standards, was harder to reason about and more difficult to modify, i.e. less maintainable, than the automatically checked Python code.
+As soft evidence for the checks' effectiveness in producing more maintainable code, the researcher who continued development after the summer program's end notes that the front-end code, namely the HTML, CSS, and JavaScript, which had no such automated coding standards, was harder to reason about and more difficult to modify, i.e. less maintainable, than the automatically checked Python code.
 
 
 
