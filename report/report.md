@@ -69,9 +69,8 @@ Retrieval-Augmented Generation (RAG) and prompt engineering together worked to a
 This system was then presented to students via a web interface similar to ChatGPT or Google Gemini.
 
 
-## Generation
 
-### Language Model Choice
+## Language Model Choice
 Having observed the success of large pretrained language models in other works,
 and given an extant contract between UC Riverside and Google,
 we opted to pick a pretrained model from Google's Gemini lineup.
@@ -81,7 +80,7 @@ alongside course-relevant documents, then comparing the responses.
 More powerful models were not observed to provide substantive improvement;
 however, such a conclusion is not a research finding and should be taken lightly as the evaluation was not empirical nor comprehensive.
 
-### Retrieval Augmented Generation
+## Retrieval Augmented Generation
 
 We implemented RAG to help align generations to our courses' contexts.
 Specifically, we take a collection of course documents, including lecture slides, lecture notes, assignments, and textbook chapters, and segment each document into spans of text about 1,000 characters in length.
@@ -190,12 +189,18 @@ As soft evidence for the checks' effectiveness in producing more maintainable co
 ## Code Repository Management
 
 All code was (and is) stored in a GitHub repository^[[https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master](https://github.com/joshua-zingale/ucr-chatbot-pathway-program/tree/master)].
-The repository was configured with protections on the master branch to prevent commit pushes.
+The repository was configured with protections on the master branch to prevent commit pushes and only to permit merges after a rebase onto the master branch.
 The repository was moreover configured with Continuous Integration (CI) to run Pyright, Ruff, and the unit tests against every pull request and after each merge. 
 This prevented the team members from writing to the master branch directly.
 Instead, each team member had to submit a pull request to satisfy his sprint objectives.
 All pull requests were reviewed both by the CI and the team manager before being accepted or rejected.
 This paradigm upheld code maintainability by catching problematic code before others' work built upon it.
+
+
+The requirement for all merges to be rebased against the master branch was to guarantee a linear Git history,
+which can make certain repository maintenance and debugging easier.
+Moreover, this requirement was set in place to force the student developers to grow their knowledge of git.
+
 
 ## Sprints
 
@@ -210,6 +215,19 @@ Then, every sprint assigned each of the student developers a unique task to acco
 
 The heading provided the student developers with a bird's eye view of the sprint, giving them a sense of their progress toward the end goal and an understanding of how their individual assignments contribute to the entire project.
 
+## Student Developer Feedback
+
+After the end of the summer data-science fellowship, 
+the six student developers for the AI Tutor were each sent a survey asking them to rate their before- and after-program proficiencies on tools used during development. Five of the six student developers completed the survey.
+
+Six proficiencies were surveyed, each being rated by a student developer with a number from 1 to 6, inclusive, where 1 was labeled "could/can not use" and 6 was labeled "Mastered".
+The proficiencies received the following average increases:
+- git: 1.4
+- GitHub Pull Requests: 0.6
+- General Python Programming: 0.6
+- Python for Web Development: 1.4
+- Python Linters: 2.2
+- Unit Tests: 1.0
 
 # Deployment
 
@@ -225,9 +243,21 @@ The instances' grade was selected above what we anticipated ourselves to need in
 
 # Institutional Support
 
-To deploy the AI Tutor at UC Riverside for 
+To deploy the AI Tutor at UC Riverside, we needed funding for the web servers
+and approval from the IRB for collecting data for research purposes on student usage of our system.
 
-## ITS
+## Department Funding
+
+Lacking relevant grants that could fund the AI Tutor's operation,
+we sought funding from our computer-science department before we had begun development of the system.
+We reached out to our department's head of Information Technology Systems (ITS).
+
+In our initial meeting with the head of ITS, we laid out our plan for the AI Tutor.
+We asked him about what technologies we should use to facilitate departmental support.
+He directed us toward Google products because UC Riverside has outstanding contracts with Google for providing generative AI and other compute resources.
+
+
+Throughout development, we maintained close contact with the head of ITS to ensure our compliance with department and institution standards
 
 ## IRB
 
@@ -236,7 +266,17 @@ To deploy the AI Tutor at UC Riverside for
 
 # Future Work
 
+From intra- and inter-departmental discussions with faculty,
+alongside student feedback on the current system,
+we have many ideas on how to move forward with the AI Tutor project.
+
+
 @baillifard2025effective showed that an AI Tutor that tracks each student's progress individually
 was able to improve course performance significantly.
+For our AI Tutor, integration of personalized progress tracking could
+function by inducing student knowledge states from the dialogues between the student and the AI Tutor.
+Alternatively, or additionally, we could integrate a question-and-answer system with the AI Tutor,
+empowering it to ask instructor or AI generated multiple choice questions,
+answering which would update a student's knowledge state and inform the AI Tutor on how to proceed with the dialogue.
 
 # References
