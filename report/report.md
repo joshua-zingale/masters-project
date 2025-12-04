@@ -241,28 +241,64 @@ Similar to the reasoning for our choice in which language model to use, we selec
 The instances' grade was selected above what we anticipated ourselves to need in order to facilitate expanded computational demand in future work.
 
 
-# Institutional Support
+# Working with the Institution
 
 To deploy the AI Tutor at UC Riverside, we needed funding for the web servers
 and approval from the IRB for collecting data for research purposes on student usage of our system.
+Additionally, because the AI Tutor was deployed on the cs.ucr.edu domain, funded by the department,
+we had to work with our departments Information Technology Systems department (ITS).
 
-## Department Funding
+Our interactions with our institution are here documented as a case study to provide researchers interested in running similar studies a model.
+
+## Funding
 
 Lacking relevant grants that could fund the AI Tutor's operation,
 we sought funding from our computer-science department before we had begun development of the system.
-We reached out to our department's head of Information Technology Systems (ITS).
+We reached out to our department's head of Information Technology Systems (ITS) to begin communication.
 
 In our initial meeting with the head of ITS, we laid out our plan for the AI Tutor.
 We asked him about what technologies we should use to facilitate departmental support.
-He directed us toward Google products because UC Riverside has outstanding contracts with Google for providing generative AI and other compute resources.
+He directed us toward Google products because UC Riverside had outstanding contracts with Google for providing generative AI and other compute resources; and in using Google's tools we could expect a better outcome from our request to receive departmental funding.
 
 
-Throughout development, we maintained close contact with the head of ITS to ensure our compliance with department and institution standards
+## ITS
+
+Throughout development, we maintained close contact with the head of ITS to ensure our compliance with departmental and institutional standards.
+Three key recommendations that directed our development were
+1. that we had to use generative AI platforms that were approved for P3 data, as defined by the University of California^[[https://security.ucop.edu/resources/for-suppliers.html](https://security.ucop.edu/resources/for-suppliers.html)], such as Google Gemini,
+2. that user authentication for the system had to leverage UC Riverside's existent OAuth 2.0 protocol, and
+3. that permissions for the AI Tutor be assigned to roles and roles to users, instead of permissions directly to users. 
+
+The first requirement resulted from our sending of student chat messages, which would fall under the P3 data classification, to the generative AI API.
+To get approval for our system, these data needed to be sent only to platforms approved by UC Riverside for P3 data. 
+The second requirement resulted from a plethora of campus-wide requirements for secure log-ins in student services, including the need for two-factor authentication.
+Utilizing UC Riverside's existent OAuth 2.0 server, which is Google's server, was the easiest way to meet all such requirements.
+The third requirement was to ensure safe handling of student data by avoiding bugs pertaining to a user having a permission that he should not. Granting permissions, like updating the system prompt for the AI Tutor in a course, to a role is easier to debug than a situation wherein each user has a possibly unique set of permissions.
 
 ## IRB
 
+We submitted a proposal to UC Riverside's IRB for the collection of student-interaction data with the AI Tutor, i.e. message logs, and of survey data from an end-of-term survey on students' opinions of the AI Tutor.
+
+The major contention points with the IRB, causing multiple reworkings of the proposal, were
+
+1. that students would not be penalized academically for their choice to use or not to use the system,
+2. how consent would be obtained from students for the AI Tutor system's tracking of their data, and
+3. that the AI Tutor would not be trained on any student messages.
+
+The first point was a matter of enforcing a policy whereby instructors would not have access to student-usage data until the data had been anonymized and only after the final grades had been posted.
+The second point, to obtain consent from students, led us to implement a consent form feature in the AI Tutor system: this feature prevented authenticated users from interacting with the AI Tutor until they had consenting to the data collection procedures.
+Moreover, we provided students the option to have their data stricken form our records, satisfying removal of consent policies, but only before the data had been anonymized, i.e. before the end of the academic term.
+The third point required us to be abundantly explicit in our proposal that no student data would be used to train any language model, that the data instead would only be evaluated to draw conclusions on student usage and on the AI Tutor's performance.
+
+The IRB, after having reviewed all other aspects of our proposal, required an affirmation from ITS before approving the study because we should be handling student message data with our own system and with Google's Gemini API.
+Since we had remained in contact with ITS throughout development, ITS approval was swift, granting us full IRB approval for the present study.
+
 
 # Preliminary Results
+
+As of the final week of the academic term, 649 messages have been sent by 117 students from two courses, split into three sections. Each student sent an average of 5.70 messages (σ = 8.16).
+The high standard deviation is because most students used the system very little, sending one or two messages,
+while a smaller portion used the system much more throughout the academic term.
 
 # Future Work
 
