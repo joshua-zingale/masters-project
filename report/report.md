@@ -1,7 +1,7 @@
 ---
 title: The Development and Introduction in Computer-Science Courses of an AI Tutor
 author: Joshua Zingale
-abstract: "General-purpose generative AI has been deployed in many computer science courses as an instructional aid. We present a prototype AI Tutor along with our experience developing, deploying, and gaining institutional support for it, both from our Information Technology Systems and Internal Review Board. We also report on data that we collected from student interactions with the AI Tutor, which occured in three sections across the two computer-science courses in which we deployed the AI Tutor." 
+abstract: "General-purpose generative AI has been deployed in many computer science courses as an instructional aid. We present a prototype AI Tutor along with our experience developing, deploying, and gaining institutional support for it, both from our Information Technology Systems and Internal Review Board. We also report on data that we collected from student interactions with the AI Tutor, which occured in three sections across the two computer-science courses at the R1 institution in which we deployed the AI Tutor." 
 bibliography: references.bib
 ---
 
@@ -12,22 +12,20 @@ Whereas language models as generative AI tools have been adopted either official
 
 In this study, we introduce a prototype AI Tutor to three UC Riverside computer-science sections across two courses. The AI Tutor was made available to all students in the sections, with students' usage data being collected.
 
-Works like @liu2024teaching, though comprehensive in their offering of language-model-driven tools designed specifically for Harvard University, are not representative of what may be feasible at the typical institution with limited staff support but seeking to develop an institutionally specific AI Tutor.
-We therefore report also on our student-driven development, our deployment, the financial support from our university, and our experience with our university's Information Technology Systems (ITS) and Internal Review Board (IRB).
-
 From this work, we seek to equip researchers with data from our institution on how students adopted the AI Tutor and with guidance for making a similar deployment at their own institutions.
+We therefore report also on our student-driven development, our deployment, the financial support from our university, and our experience with our university's Information Technology Systems (ITS) and Internal Review Board (IRB).
 
 After a discussion of related works, we describe the AI Tutor's design and functionality.
 Next, we describe the development process for the AI Tutor and its means of deployment.
 To aid researchers in getting similar studies approved by their Internal Review Boards (IRBs), we also document some contention points from our experience. After we report on some aggregate data from our students' usage, we finally identify future directions of research.
 
 This work marks the first published deployment of a generative AI assistant for student use at UC Riverside.
-Extra-institutionally, we make the following contributions:
+Extra-institutionally, we contribute
 
 - a technical outline of language-model integration for educational use,
 - a development outline for replication by other institutions,
-- experience approving and funding a deployment,
-- and data on student interactions with the AI tutor from a major US, R1 institution.
+- experience approving and funding the deployment of an AI Chatbot for instructional use, and
+- data on student interactions with the AI tutor from a major US, R1 institution.
 
 Our goal with the student-interaction data was observational, meaning we did not have formal hypotheses for which to build evidence. Instead, this study builds the foundation for future research into the effectiveness of such systems in computer-science curricula.
 
@@ -45,6 +43,10 @@ educators have taken to implement language models as instructional aids in varyi
 For example, @qinjin_jia_llm-generated_2024 and @neyem_exploring_2024 use language models to generate automated feedback on student work. @taylor_dcc_2024 integrated language-model generation into a C compiler to enhance the explanatory power of compiler errors for students. @kazemitabaar_codeaid_2024 created an interactive web environment wherein students can submit code before asking questions about it. In what may be the most comprehensive published adoption of language models in a university course, @liu2024teaching deployed a suite of custom language-model powered tools to provide students with 24/7 support during Harvard's introductory computer-science course, including a chat interface for general logistic or material questions, an IDE extension for in-editor assistance, and a bot that contributes to the course forum.
 
 
+A work as @liu2024teaching, though comprehensive in its offering of language-model-driven tools designed specifically for a target institution, is not representative of what may be feasible at the typical institution with limited staff support but with a desire to develop an institutionally specific AI Tutor.
+This work presents a more modest deployment of an AI Tool that could readily be implemented at another institution.
+
+
 ## Pedagogical Issues with Language Models
 There are two concerns shared among educators who have implemented language models in their
 courses: (1) that faulty information may be shared with a student due to *hallucination*,
@@ -60,8 +62,7 @@ Retrieval Augmented Generation (RAG) [@lewis2020retrieval] can be used to reduce
 
 
 ### Addressing Oversharing
-To prevent too much information from being shared with students, many pedagogical language-model systems use prompt engineering [@taylor_dcc_2024; @liu2024teaching].
-
+To prevent too much information from being shared with students, many pedagogical language-model systems use prompt engineering [@taylor_dcc_2024; @liu2024teaching; @kazemitabaar_codeaid_2024]. @kazemitabaar_codeaid_2024 used prompt engineering within a two-step process, where the model first generated code for a student, then using a secondary model to convert the code into pseudocode, avoiding oversharing in their context.
 
 # The AI Tutor
 
@@ -69,13 +70,12 @@ Retrieval-Augmented Generation (RAG) and prompt engineering together worked to a
 This system was then presented to students via a web interface similar to ChatGPT or Google Gemini.
 
 
-
 ## Language Model Choice
 Having observed the success of large pretrained language models in other works,
 and given an extant contract between UC Riverside and Google,
 we opted to pick a pretrained model from Google's Gemini lineup.
 Among Google's available models, Gemini 2.0 Flash was selected to balance cost with effectiveness.
-The effectiveness was gauged by informally prompting multiple models with student-like questions
+The effectiveness was gauged informally by prompting multiple models with student-like questions
 alongside course-relevant documents, then comparing the responses.
 More powerful models were not observed to provide substantive improvement;
 however, such a conclusion is not a research finding and should be taken lightly as the evaluation was not empirical nor comprehensive.
@@ -103,19 +103,19 @@ The choices to make each segment about 1,000 characters and to select the top-8 
 
 ## Data Collection
 
-To provide a chat interface to students, all messages sent from students to the AI Tutor, along with the messages sent back to the students, need to be stored to allow students and the AI Tutor to reference a conversation's logs.
-These logs are stored also to help answer research quest
+To provide a chat interface to students, and to collect data toward research ends, all messages sent from students to the AI Tutor, along with the messages sent back to the students, need to be stored to allow students and the AI Tutor to reference a conversation's logs.
+The data were stored in a Postgres database.
+
 
 ## Web Interface
 
 Students and instructors access the AI Tutor through our web interface. The web server uses Flask^[[https://flask.palletsprojects.com/en/stable/](https://flask.palletsprojects.com/en/stable/)], a light-weight Python library for creating web endpoints.
-The web UI was developed using a no-framework environment, with standard HTML, CSS, and JavaScript running the frontend.
+The web front end was developed using a no-framework environment, with standard HTML, CSS, and JavaScript running the frontend.
 
 
 ### User Authentication
 
 User authentication was handled with OAuth 2.0 to comply both with general security standards and with UC Riverside's standards for official web services. Since UC Riverside already leveraged Google's authorization server, we likewise elected to use Google's authorization server, allowing students and instructors to sign-in to the AI Tutor with their institutional credentials.
-
 
 ![The course selection menu. This authenticated user has instructor access for CS166, but only student access for the other two courses.](images/course-selection.png)
 
@@ -125,8 +125,8 @@ The instructor can customize the behavior of the AI Tutor through the instructor
 
 - set a system prompt for the language model,
 - upload documents for the RAG engine,
-- add and remove consent forms,
-- and add and remove students from the course.
+- add and remove consent forms, and
+- add and remove students from the course.
 
 Any added consent form prevents added students from accessing the AI Tutor until the consent form is accepted. This was added to make our data collection IRB compliant.
 
@@ -164,20 +164,21 @@ This student-developer portion will be discussed below.
 ## Student Developers
 The summer program split a cohort of 22 students into project groups and supported them with professional development lectures and workshops.
 During the summer program, one of the authors (Zingale) managed a team of six upperclassman undergraduates to develop the AI Tutor.
+The development team met twice a week for the extent of the program for one to three hours, depending on the needs of the day.
 The student developers had foundational programming knowledge but lacked experience working on a development team;
 to wit, they had not worked with coding standards, code linters, unit tests with code coverage requirements, nor continuous integration.
 
 Given the limited length of the summer program, starting to code as soon as possible was imperative. This imperative led the design of the coding standards, code repository management, and sprints.
-The aspects were designed both to educate the student developers on working toward a production environment and to encourage maintainable code beyond the students' abandonment of the project. 
+The aspects were designed both to educate the student developers on working toward a production environment and to encourage maintainable code beyond the students' abandonment of the project.
 
 ## Coding Standards
 
 The following standards were enforced, requiring all Python code to pass
 
-- Pyright^[[https://github.com/microsoft/pyright](https://github.com/microsoft/pyright)] on strict mode, a type checker that requires the use of Python's otherwise optional type annotations;
-- Ruff^[[https://github.com/astral-sh/ruff](https://github.com/astral-sh/ruff)]'s formatting and logic checks, which checked for such things as docstring presence and lack of unused variables;
-- all existent unit tests;
-- and test coverage expectations, instructing the student developers to write tests for added features.
+- Pyright^[[https://github.com/microsoft/pyright](https://github.com/microsoft/pyright)] on strict mode, a type checker that requires the use of Python's otherwise optional type annotations,
+- Ruff^[[https://github.com/astral-sh/ruff](https://github.com/astral-sh/ruff)]'s formatting and logic checks, which checked for such things as docstring presence and lack of unused variables,
+- all existent unit tests, and
+- test coverage expectations, instructing the student developers to write tests for added features.
 
 
 These standards were new to all the student developers, but they learned well within the first week of development how to run the tests and how to bring their code into compliance therewith.
@@ -198,7 +199,7 @@ This paradigm upheld code maintainability by catching problematic code before ot
 
 
 The requirement for all merges to be rebased against the master branch was to guarantee a linear Git history,
-which can make certain repository maintenance and debugging easier.
+which can make some repository maintenance and debugging easier.
 Moreover, this requirement was set in place to force the student developers to grow their knowledge of git.
 
 
@@ -206,14 +207,14 @@ Moreover, this requirement was set in place to force the student developers to g
 
 Development was managed over five roughly-week-long sprints^[[https://github.com/joshua-zingale/masters-project/tree/master/development-sprints][https://github.com/joshua-zingale/masters-project/tree/master/development-sprints]]. All sprints began with a heading containing one-line statements that included
 
-- **State:** the current state of the project,
-- **Objective:** that to be accomplished during the sprint,
+- **State:** the current state of the project;
+- **Objective:** that to be accomplished during the sprint;
 - **Future:** work to be accomplished after the sprint had been completed.
 
 After the heading, each sprint had a few paragraphs for an introduction that described logistic information, coding style guides, or other general topics for the whole development team.
 Then, every sprint assigned each of the student developers a unique task to accomplish either individually or in a group.
 
-The heading provided the student developers with a bird's eye view of the sprint, giving them a sense of their progress toward the end goal and an understanding of how their individual assignments contribute to the entire project.
+The heading provided the student developers with a bird's eye view of the sprint, giving them a sense of their progress toward the end goal and an understanding of how their individual assignments contribute to the entire project's direction.
 
 ## Student Developer Feedback
 
@@ -240,6 +241,15 @@ The AI Tutor was deployed in the Google Cloud Platform on three `e2-medium (2 vC
 Similar to the reasoning for our choice in which language model to use, we selected the Google Cloud Platform because of UC Riverside's effective contract with Google for various services.
 The instances' grade was selected above what we anticipated ourselves to need in order to facilitate expanded computational demand in future work.
 
+## Architecture
+
+The architecture of the web backend consists of three virtual machines, which include one
+
+1. for the web server,
+2. for the Postgres database, and
+3. for the Ollama service.
+
+The three VMs communicate over a virtual internal network, with the web server being port-forwarded.
 
 # Working with the Institution
 
@@ -259,6 +269,7 @@ We reached out to our department's head of Information Technology Systems (ITS) 
 In our initial meeting with the head of ITS, we laid out our plan for the AI Tutor.
 We asked him about what technologies we should use to facilitate departmental support.
 He directed us toward Google products because UC Riverside had outstanding contracts with Google for providing generative AI and other compute resources; and in using Google's tools we could expect a better outcome from our request to receive departmental funding.
+
 
 
 ## ITS
@@ -296,9 +307,39 @@ Since we had remained in contact with ITS throughout development, ITS approval w
 
 # Preliminary Results
 
+Our data collection will not end until the quarter has officially ended, but we here report rough aggregate results pending the completion of the data collection and the final analysis thereof.
+
+We have two sources of data pertaining to the AI Tutor: whereas the usage data collected from student interactions with the system objectively provide insight into student engagement with the system and the AI Tutor's performance, we also sent out a survey to the students in the target computer-science sections that asked five questions to construct a more qualitative impression of the AI Tutor.
+
+## Usage Statistics
+
 As of the final week of the academic term, 649 messages have been sent by 117 students from two courses, split into three sections. Each student sent an average of 5.70 messages (σ = 8.16).
 The high standard deviation is because most students used the system very little, sending one or two messages,
 while a smaller portion used the system much more throughout the academic term.
+
+
+## Student Survey
+
+We developed one survey on the Qualtrics platform with six questions that sought to gauge student favor for the AI Tutor in comparison to other generative AI Tools.
+The first five questions were multiple choice and the final was free response, asking for open-ending feedback for the AI Tutor.
+
+In each of the sections in which the AI Tutor was deployed,
+the instructor announced to the students that the survey could be taken for extra credit.
+A student could opt not to have his data used in this study at the start of the survey and still receive extra credit for completion. Of 287 students to whom the survey was sent out, 148 completed the survey with 120 consenting to have their data reported in this study.
+All data below are from the same of students that consented to have their data included in this study.
+
+Of the respondents, 78 reported to have used the AI Tutor less than other generative AI tools like ChatGPT or Gemini, 30 reported to have used it about the same, 5 reported to have used it more, and 7 selected "Prefer not to answer" for their usage frequency either of the AI Tutor or of other generative AI tools.
+
+Most students either did not answer the open-ended question or did not answer meaningfully, e.g. by saying "NA".
+Among those who did answer meaningfully, the following quotations identify some negative themes that the authors have noted:
+- "I feel like the AI Tutor was a bit too restricted. So much so to the point where the AI doesn't really process any information but just gives you directions of where the information is. It's not a bad idea but I feel like the strength of an AI tutor would be emphasized in its ability to process information given to them and display it to us in a much digestible way."
+- "AI Tutor couldn't think very well outside of its course material. It's basically a better search tool for the course material"
+- "The tutor is too gimped. I only used it for midterm one. I asked it to create a mock exam usings its docs but it was a horrid mock. If i remember correctly it didnt really do what i asked or it has super basic questions on it. I asked it to make an exam just to cover my blindspots to see if theres something in the docs which i did not write down"
+
+Here are some positive quotations:
+
+- "it feels more ethical since it’s based on class notes and not random internet stuff"
+- "AI Tutor is definitely better than other AI tools when it comes to course specific content and not hallucinating."
 
 # Future Work
 
