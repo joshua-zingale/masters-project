@@ -1,7 +1,9 @@
 ---
 title: The Development and Introduction in Computer-Science Courses of an AI Tutor
 author: Joshua Zingale
-abstract: "General-purpose generative AI has been deployed in many computer science courses as an instructional aid. We present a prototype AI Tutor along with our experience developing, deploying, and gaining institutional support for it, both from our Information Technology Systems and Internal Review Board. We also report on data that we collected from student interactions with the AI Tutor, which occured in three sections across the two computer-science courses at the R1 institution in which we deployed the AI Tutor." 
+abstract: "General-purpose generative AI has been deployed in many computer science courses as an instructional aid. We present a prototype AI Tutor along with our experience developing, deploying, and gaining institutional support for it, both from our Information Technology Systems and Internal Review Board. We also report on data that we collected from student interactions with the AI Tutor, which occured in three sections across the two computer-science courses at the R1 institution in which we deployed the AI Tutor. We find that, in contrast to previous works, students gravitated toward generally available tools instead of the provided AI Tutor, possibly because today they see an instructor-provided chatbot as something to compete with generally available chatbots.
+
+This is a draft version for Joshua Zingale's master's project. More information than necessary is included and sections need refinement. "We" is used only to make transition to a conference paper easier." 
 bibliography: references.bib
 ---
 
@@ -100,6 +102,26 @@ Whenever a user sends a message to the AI Tutor, the following steps are taken.
 
 The choices to make each segment about 1,000 characters and to select the top-8 most similar segments were both made after informal qualitative analysis of prompt-response pairs during development.
 
+## System Prompt
+
+The system prompt is settable via the instructor portal in the web UI.
+However, for this work, we used the same prompt for all three sections, which is given below.
+
+```
+# Main directive
+You are a helpful student tutor for a university computer science course. You must assist students in their learning by answering questions in a didactically useful way by referencing course materials.
+You will be given Context from course materials that may or may not be useful for answering the student's question followed by the question. Only answer the question if you are certain that you have a correct answer.
+Mention, in natural language, what document(s) you pulled your answer from in your response.
+
+## Further instructions
+You may provide any relevant code that is in the Context; however, you should not provide code for students that is not in the Context because doing so could solve homework assignments for the students, which you should not do.
+If the context is not relevant to the student's question, and if it is not a follow up question, then you should tell the student, "I cannot find any relevant course materials to help answer your question. Either reword your question or reach out to your instructional faculty. There may be ULA's available to help. You can check their availability [here](https://ula.cs.ucr.edu/calendar)."
+
+If you cannot find Context that answers the question, answer with general guidance, but do not give a full coding solution. You are to help the student learn.
+NEVER COMPLETE CODE FOR STUDENTS. 
+```
+
+The system prompt was constructed while communicating with the instructors of the target courses to align the AI Tutor with instructor expectations.
 
 ## Data Collection
 
@@ -301,7 +323,7 @@ The second point, to obtain consent from students, led us to implement a consent
 Moreover, we provided students the option to have their data stricken form our records, satisfying removal of consent policies, but only before the data had been anonymized, i.e. before the end of the academic term.
 The third point required us to be abundantly explicit in our proposal that no student data would be used to train any language model, that the data instead would only be evaluated to draw conclusions on student usage and on the AI Tutor's performance.
 
-The IRB, after having reviewed all other aspects of our proposal, required an affirmation from ITS before approving the study because we should be handling student message data with our own system and with Google's Gemini API.
+The IRB, having reviewed all other aspects of our proposal, required an affirmation from ITS before approving the study because we should be handling student message data with our own system and with Google's Gemini API.
 Since we had remained in contact with ITS throughout development, ITS approval was swift, granting us full IRB approval for the present study.
 
 
@@ -320,7 +342,7 @@ while a smaller portion used the system much more throughout the academic term.
 
 ## Student Survey
 
-We developed one survey on the Qualtrics platform with six questions that sought to gauge student favor for the AI Tutor in comparison to other generative AI Tools.
+We developed one anonymous survey on the Qualtrics platform with six questions that sought to gauge student favor for the AI Tutor in comparison to other generative AI Tools.
 The first five questions were multiple choice and the final was free response, asking for open-ending feedback for the AI Tutor.
 
 In each of the sections in which the AI Tutor was deployed,
@@ -341,12 +363,38 @@ Here are some positive quotations:
 - "it feels more ethical since it’s based on class notes and not random internet stuff"
 - "AI Tutor is definitely better than other AI tools when it comes to course specific content and not hallucinating."
 
+
+## Discussion
+
+The low average number of messages sent by students alongside the survey feedback indicate that most students found general tools to be more useful.
+We postulate that the ready availability of high quality AI Tools leads students to see the AI Tutor as a competitor to them, leading them to choose one over the other.
+
+Whereas earlier works [@liu2024teaching; @kazemitabaar_codeaid_2024] experimented at a time when generally available AI tools did not have RAG, web searches, or other innovations, and when some students had conceivably not developed study patterns with generative AI, this work transpires a couple of years later, with generally available tools that have capabilities beyond those attainable in a shorter development cycle with limited resources;
+moreover, many students have grown accustomed to the behavior of other generally available AI tools, thence yielding the feedback that the current tool, though intentionally designed not to divulge information beyond the scope of the course, is "too restricted."
+In this sense, this work's AI Tutor has to compete with industry for the interest of students.
+Students' preference for other tools, however, need not mean that the generally available AI tools are superior for learning, besides that some students still preferred to use the AI Tutor.
+
+Nevertheless, the path forward for introducing novel pedagogical generative-AI applications is not necessarily bleak.
+One issue with the AI Tutor may have been its presentation, that its surface-level similarity to other chatbots led students to expect feature parity.
+Researchers therefore may do well to educate students gaining access to similar tools on exactly how the tool differs from a normal chatbot.
+Alternatively, researchers may follow @taylor_dcc_2024, who integrated a language model into a compiler for enhanced error messaging, in their offering of a tool that more explicitly differs from the typical generative AI chatbot in quality.
+Thus presenting a tool with novel features or creative appearance may lead to more ready adoption from students.
+
+# TBD
+
+This section is not to be included in any publication, but instead lists to-do items before this work is suitable for publication in any venue.
+
+- We should analyze and annotate at least a portion of the messages sent by students and the responses from the tutor. This would enable us to make more sense of students' opinions of the AI Tutor.
+- The "Preliminary Results" section should have a new name and should contain graphical displays of the data collected.
+- 
+
 # Future Work
 
-From intra- and inter-departmental discussions with faculty,
-alongside student feedback on the current system,
-we have many ideas on how to move forward with the AI Tutor project.
-
+The current interface for the AI Tutor, though functional, is not easy to extend:
+while vanilla JavaScript worked well for a short development cycle for inexperience developers,
+the plethora of features that could be added to improve the chat interface to meet growing demands 
+Therefore, we are currently working on replacing the interface with one powered by Chainlit^[[https://chainlit.io/](https://chainlit.io/)], an open-source Python library for creative chat interfaces with support for multimedia and Model Context Protocol^[[https://modelcontextprotocol.io/docs/getting-started/intro](https://modelcontextprotocol.io/docs/getting-started/intro)] (MCP).
+MCP will make a powerful addition as it makes chat interfaces much more extensible by enabling agentic behavior, such as the language model interfacing with external APIs or accessing data in a more context-specific manner.
 
 @baillifard2025effective showed that an AI Tutor that tracks each student's progress individually
 was able to improve course performance significantly.
@@ -355,5 +403,9 @@ function by inducing student knowledge states from the dialogues between the stu
 Alternatively, or additionally, we could integrate a question-and-answer system with the AI Tutor,
 empowering it to ask instructor or AI generated multiple choice questions,
 answering which would update a student's knowledge state and inform the AI Tutor on how to proceed with the dialogue.
+
+# Conclusion
+
+The AI Tutor, the creation of which driven by student developers, demonstrates how one 
 
 # References
