@@ -1,9 +1,10 @@
 ---
 title: The Development and Introduction in Computer-Science Courses of an AI Tutor
 author: Joshua Zingale
-abstract: "General-purpose generative AI has been deployed in many computer science courses as an instructional aid. We present a prototype AI Tutor along with our experience developing, deploying, and gaining institutional support for it, both from our Information Technology Systems and Internal Review Board. We also report on data that we collected from student interactions with the AI Tutor, which occured in three sections across the two computer-science courses at the R1 institution in which we deployed the AI Tutor. We find that, in contrast to previous works, students gravitated toward generally available tools instead of the provided AI Tutor, possibly because today they see an instructor-provided chatbot as something to compete with generally available chatbots.
+abstract: "General-purpose generative AI has been deployed in many computer science courses as an instructional aid. We present a prototype AI Tutor along with our experience developing, deploying, and gaining institutional support for it, both from our Information Technology Systems and Internal Review Board. We also report on data that we collected from student interactions with the AI Tutor, which occured in three sections across the two computer-science courses at the R1 institution in which we deployed the AI Tutor. We find that, in contrast to previous works, students gravitated toward generally available tools instead of the provided AI Tutor. We postulate that students' opinions differ from previous works because today they see an instructor-provided chatbot as something to compete with generally available chatbots.
 
-This is a draft version for Joshua Zingale's master's project. More information than necessary is included and sections need refinement. "We" is used only to make transition to a conference paper easier." 
+
+This is a draft version for Joshua Zingale's master's project. More information than necessary is included and sections need refinement. 'We' is used only to make transition to a conference paper easier. Whereas this is a report, meant to cover all that was accomplished, I anticipate condensing it into one or two smaller papers for conference submission."
 bibliography: references.bib
 ---
 
@@ -109,15 +110,27 @@ However, for this work, we used the same prompt for all three sections, which is
 
 ```
 # Main directive
-You are a helpful student tutor for a university computer science course. You must assist students in their learning by answering questions in a didactically useful way by referencing course materials.
-You will be given Context from course materials that may or may not be useful for answering the student's question followed by the question. Only answer the question if you are certain that you have a correct answer.
-Mention, in natural language, what document(s) you pulled your answer from in your response.
+You are a helpful student tutor for a university computer science course.
+You must assist students in their learning by answering questions in a
+didactically useful way by referencing course materials.
+You will be given Context from course materials that may or may not be useful
+for answering the student's question followed by the question. Only answer the
+question if you are certain that you have a correct answer.
+Mention, in natural language, what document(s) you pulled your answer from in
+your response.
 
 ## Further instructions
-You may provide any relevant code that is in the Context; however, you should not provide code for students that is not in the Context because doing so could solve homework assignments for the students, which you should not do.
-If the context is not relevant to the student's question, and if it is not a follow up question, then you should tell the student, "I cannot find any relevant course materials to help answer your question. Either reword your question or reach out to your instructional faculty. There may be ULA's available to help. You can check their availability [here](https://ula.cs.ucr.edu/calendar)."
+You may provide any relevant code that is in the Context; however, you should
+not provide code for students that is not in the Context because doing so could
+solve homework assignments for the students, which you should not do.
+If the context is not relevant to the student's question, and if it is not a
+follow up question, then you should tell the student, "I cannot find any relevant
+course materials to help answer your question. Either reword your question or reach
+out to your instructional faculty. There may be ULA's available to help.
+You can check their availability [here](https://ula.cs.ucr.edu/calendar)."
 
-If you cannot find Context that answers the question, answer with general guidance, but do not give a full coding solution. You are to help the student learn.
+If you cannot find Context that answers the question, answer with general guidance,
+but do not give a full coding solution. You are to help the student learn.
 NEVER COMPLETE CODE FOR STUDENTS. 
 ```
 
@@ -335,7 +348,7 @@ We have two sources of data pertaining to the AI Tutor: whereas the usage data c
 
 ## Usage Statistics
 
-As of the final week of the academic term, 649 messages have been sent by 117 students from two courses, split into three sections. Each student sent an average of 5.70 messages (σ = 8.16).
+As of the final week of the academic term, 649 messages have been sent by 117 students from two courses, split into three sections. Each student sent an average of 5.70 messages ($\sigma = 8.16$).
 The high standard deviation is because most students used the system very little, sending one or two messages,
 while a smaller portion used the system much more throughout the academic term.
 
@@ -382,11 +395,14 @@ Thus presenting a tool with novel features or creative appearance may lead to mo
 
 # TBD
 
-This section is not to be included in any publication, but instead lists to-do items before this work is suitable for publication in any venue.
+This section is not to be included in any publication, but instead lists to-do (or maybe-to-do) items before this work is suitable for publication in any venue.
 
 - We should analyze and annotate at least a portion of the messages sent by students and the responses from the tutor. This would enable us to make more sense of students' opinions of the AI Tutor.
 - The "Preliminary Results" section should have a new name and should contain graphical displays of the data collected.
-- 
+- All data must be updated to reflect the final results for the academic quarter after the academic quarter has ended.
+- Build stronger narrative around the struggle with winning students over to an instructor provided tool instead of generally available tools.
+- More references should be brought in throughout.
+- The conclusion should be stronger.
 
 # Future Work
 
@@ -404,8 +420,15 @@ Alternatively, or additionally, we could integrate a question-and-answer system 
 empowering it to ask instructor or AI generated multiple choice questions,
 answering which would update a student's knowledge state and inform the AI Tutor on how to proceed with the dialogue.
 
+Using our existent system, we have demoed a topic-specific AI Tutor with faculty from UC Riverside's Writing Program.
+The concept is to create an agent for each topic (e.g. Article Usage, Subject Verb Agreement).
+Then, a student can use the topic specific agent to study for a specific portion of the course.
+
 # Conclusion
 
-The AI Tutor, the creation of which driven by student developers, demonstrates how one 
+The AI Tutor was developed in large part by student developers and deployed in three sections across two computer-science courses.
+Our development methods were chosen to promote rapid development with an ephemeral team and may be used as a starting point for researchers to create their own pedagogical AI with the help of student developers.
+When pedagogical AI, researchers should consider how to make their platforms qualitatively different, or distinct, from publically available tools, lest students prefer the uncensored version.
+
 
 # References
