@@ -7,5 +7,6 @@ fi
 
 pandoc report.md -o report.pdf \
     --citeproc \
-    --from markdown+inline_notes
+    --from markdown+inline_notes \
+    --metadata date="`date "+%B %-d, %Y"`"
 echo "Compilation complete"
