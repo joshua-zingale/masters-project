@@ -258,6 +258,7 @@ the six student developers for the AI Tutor were each sent a survey asking them 
 
 Six proficiencies were surveyed, each being rated by a student developer with a number from 1 to 6, inclusive, where 1 was labeled "could/can not use" and 6 was labeled "Mastered".
 The proficiencies received the following average increases:
+
 - git: 1.4
 - GitHub Pull Requests: 0.6
 - General Python Programming: 0.6
@@ -367,6 +368,7 @@ Of the respondents, 78 reported to have used the AI Tutor less than other genera
 
 Most students either did not answer the open-ended question or did not answer meaningfully, e.g. by saying "NA".
 Among those who did answer meaningfully, the following quotations identify some negative themes that the authors have noted:
+
 - "I feel like the AI Tutor was a bit too restricted. So much so to the point where the AI doesn't really process any information but just gives you directions of where the information is. It's not a bad idea but I feel like the strength of an AI tutor would be emphasized in its ability to process information given to them and display it to us in a much digestible way."
 - "AI Tutor couldn't think very well outside of its course material. It's basically a better search tool for the course material"
 - "The tutor is too gimped. I only used it for midterm one. I asked it to create a mock exam usings its docs but it was a horrid mock. If i remember correctly it didnt really do what i asked or it has super basic questions on it. I asked it to make an exam just to cover my blindspots to see if theres something in the docs which i did not write down"
